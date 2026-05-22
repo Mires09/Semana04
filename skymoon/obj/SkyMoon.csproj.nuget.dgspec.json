@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/Semana04/SkyMoon/SkyMoon.csproj": {}
+    "/workspaces/Semana04/skymoon/SkyMoon.csproj": {}
   },
   "projects": {
-    "/workspaces/Semana04/SkyMoon/SkyMoon.csproj": {
+    "/workspaces/Semana04/skymoon/SkyMoon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/Semana04/SkyMoon/SkyMoon.csproj",
+        "projectUniqueName": "/workspaces/Semana04/skymoon/SkyMoon.csproj",
         "projectName": "SkyMoon",
-        "projectPath": "/workspaces/Semana04/SkyMoon/SkyMoon.csproj",
+        "projectPath": "/workspaces/Semana04/skymoon/SkyMoon.csproj",
         "packagesPath": "/home/codespace/.nuget/packages/",
-        "outputPath": "/workspaces/Semana04/SkyMoon/obj/",
+        "outputPath": "/workspaces/Semana04/skymoon/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/codespace/.nuget/NuGet/NuGet.Config"

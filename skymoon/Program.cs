@@ -27,11 +27,25 @@ app.MapGet("/", () =>
     return Results.Ok("API SkyMoon funcionando com sucesso!");
 });
 
-/* app.MapPost("/funcionario", (JsonElement body) =>
+app.MapPost("/funcionario", (JsonElement body) =>
 {
-    
+    Funcionario funcionario = new Funcionario();
+
+    funcionario.Nome = body.GetProperty("nome").GetString();
+
+    Console.WriteLine(funcionario.Nome);
+
+    funcionarios[totalFuncionarios] = funcionario;
+    totalFuncionarios++;
+
+    return Results.Ok(
+        new{
+            funcionario
+        }
+    );
 });
 
+/* 
 app.MapGet("/funcionario", () =>
 {
     
