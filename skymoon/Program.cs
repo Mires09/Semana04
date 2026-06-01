@@ -19,7 +19,7 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-Funcionario[] funcionarios = new Funcionario[100];
+Funcionario[] listafuncionarios = new Funcionario[100];
 int totalFuncionarios = 0;
 
 app.MapGet("/", () =>
@@ -29,13 +29,18 @@ app.MapGet("/", () =>
 
 app.MapPost("/funcionario", (JsonElement body) =>
 {
+    Random random = new();
+
     Funcionario funcionario = new Funcionario();
 
+    funcionario.Id = random.Next(1000,9999);
     funcionario.Nome = body.GetProperty("nome").GetString();
+    funcionario.Idade = body.GetProperty("idade").GetInt16();
+    funcionario.Cargo = body.GetProperty("cargo").GetString();
+    funcionario.Departamento = body.GetProperty("departamento").GetString();
+    funcionario.Salario = body.GetProperty("salario").GetDouble();
 
-    Console.WriteLine(funcionario.Nome);
-
-    funcionarios[totalFuncionarios] = funcionario;
+    listafuncionarios[totalFuncionarios] = funcionario;
     totalFuncionarios++;
 
     return Results.Ok(
