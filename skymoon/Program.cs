@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.WebHost.UseUrls("http://0.0.0.0:8000");
+// builder.WebHost.UseUrls("http://0.0.0.0:8000");
 
 var app = builder.Build();
 
@@ -28,7 +28,8 @@ app.MapGet("/", () =>
     return Results.Ok("API SkyMoon funcionando com sucesso!");
 });
 
-app.MapPost("/funcionario", (JsonElement body) =>
+//Adicionar novos funcionários
+app.MapPost("/cadastrarfuncionarios", (JsonElement body) =>
 {
     Random random = new();
 
@@ -51,8 +52,8 @@ app.MapPost("/funcionario", (JsonElement body) =>
     );
 });
 
-
-app.MapGet("/listafuncionario", () =>
+//Listar os funcionários cadastrados
+app.MapGet("/listarfuncionarios", () =>
 {
     Funcionario[] funcionariosCadastrados = new Funcionario[totalFuncionarios];
 
@@ -66,5 +67,69 @@ app.MapGet("/listafuncionario", () =>
         funcionariosCadastrados
     });
 });
+
+
+//Deletar funcionários
+app.MapDelete("/deletarfuncionario/{id}", (int id) =>
+{
+    int index = -1;
+
+    // Procurar funcionário pelo Id
+    for (int i = 0; i < totalFuncionarios; i++)
+    {
+        if (listafuncionarios[i].Id == id)
+        {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1)
+    {
+        return Results.NotFound(new { mensagem = "Funcionário não encontrado." });
+    }
+
+    // Remover
+    for (int i = index; i < totalFuncionarios - 1; i++)
+    {
+        listafuncionarios[i] = listafuncionarios[i + 1];
+    }
+
+    totalFuncionarios--;
+
+    return Results.Ok(new { mensagem = "Funcionário removido com sucesso." });
+});
+
+//Atualizar funcionário
+app.MapPut("/atualizarfuncionario/{id}", (int id, JsonElement body) =>
+{
+    Funcionario? funcionario = null;
+
+    // Procurar funcionário pelo Id
+    for (int i = 0; i < totalFuncionarios; i++)
+    {
+        if (listafuncionarios[i].Id == id)
+        {
+            funcionario = listafuncionarios[i];
+
+            funcionario.Nome = body.GetProperty("nome").GetString();
+            funcionario.Idade = body.GetProperty("idade").GetInt16();
+            funcionario.Cargo = body.GetProperty("cargo").GetString();
+            funcionario.Departamento = body.GetProperty("departamento").GetString();
+            funcionario.Salario = body.GetProperty("salario").GetDouble();
+
+            listafuncionarios[i] = funcionario;
+            break;
+        }
+    }
+
+    if (funcionario == null)
+    {
+        return Results.NotFound(new { mensagem = "Funcionário não encontrado." });
+    }
+
+    return Results.Ok(new { mensagem = "Funcionário atualizado com sucesso.", funcionario });
+});
+
 
 app.Run();
