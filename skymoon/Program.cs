@@ -19,6 +19,7 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
+
 Funcionario[] listafuncionarios = new Funcionario[100];
 int totalFuncionarios = 0;
 
@@ -50,35 +51,20 @@ app.MapPost("/funcionario", (JsonElement body) =>
     );
 });
 
-/* 
-app.MapGet("/funcionario", () =>
-{
-    
-});
 
-app.MapPatch("/funcionario/{id}", (int id, JsonElement body) =>
+app.MapGet("/listafuncionario", () =>
 {
-    
-});
+    Funcionario[] funcionariosCadastrados = new Funcionario[totalFuncionarios];
 
-app.MapPut("/funcionario/{id}", (int id, JsonElement body) =>
-{   
-    
-});
+    for (int i = 0; i < totalFuncionarios; i++)
+    {
+        funcionariosCadastrados[i] = listafuncionarios[i];
+    }
 
-app.MapDelete("/funcionario", (int id) =>
-{
-    
+    return Results.Ok(new
+    {
+        funcionariosCadastrados
+    });
 });
-
-app.MapGet("/funcionario/departamento/busca", (string departamento) =>
-{
-    
-});
-
-app.MapGet("/funcionario/busca", (string nome) =>
-{
-   
-}); */
 
 app.Run();
