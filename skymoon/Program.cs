@@ -86,7 +86,9 @@ app.MapDelete("/deletarfuncionario/{id}", (int id) =>
 
     if (index == -1)
     {
-        return Results.NotFound(new { mensagem = "Funcionário não encontrado." });
+        return Results.NotFound(new { 
+            mensagem = "Funcionário não encontrado." 
+    });
     }
 
     // Remover
@@ -97,7 +99,9 @@ app.MapDelete("/deletarfuncionario/{id}", (int id) =>
 
     totalFuncionarios--;
 
-    return Results.Ok(new { mensagem = "Funcionário removido com sucesso." });
+    return Results.Ok(new { 
+        mensagem = "Funcionário removido com sucesso." 
+        });
 });
 
 //Atualizar funcionário
@@ -125,11 +129,63 @@ app.MapPut("/atualizarfuncionario/{id}", (int id, JsonElement body) =>
 
     if (funcionario == null)
     {
-        return Results.NotFound(new { mensagem = "Funcionário não encontrado." });
+        return Results.NotFound(new { 
+            mensagem = "Funcionário não encontrado." 
+            });
     }
 
-    return Results.Ok(new { mensagem = "Funcionário atualizado com sucesso.", funcionario });
+    return Results.Ok(new { 
+        mensagem = "Funcionário atualizado com sucesso.", funcionario 
+        });
 });
 
+
+//Atualizar parcialmente funcionário
+app.MapPatch("/atualizarfuncionario/{id}", (int id, JsonElement body) =>
+{
+    Funcionario? funcionario = null;
+
+    // Procurar funcionário pelo Id
+    for (int i = 0; i < totalFuncionarios; i++)
+    {
+        if (listafuncionarios[i].Id == id)
+        {
+            funcionario = listafuncionarios[i];
+
+            if (body.TryGetProperty("nome", out var nome))
+                funcionario.Nome = nome.GetString();
+
+            if (body.TryGetProperty("idade", out var idade))
+                funcionario.Idade = idade.GetInt16();
+
+            if (body.TryGetProperty("cargo", out var cargo))
+                funcionario.Cargo = cargo.GetString();
+
+            if (body.TryGetProperty("departamento", out var departamento))
+                funcionario.Departamento = departamento.GetString();
+
+            if (body.TryGetProperty("salario", out var salario))
+                funcionario.Salario = salario.GetDouble();
+
+            listafuncionarios[i] = funcionario;
+            break;
+        }
+    }
+
+if (funcionario == null)
+    {
+        return Results.NotFound(new 
+        { 
+            mensagem = "Funcionário não encontrado!" 
+            });
+    }
+
+    return Results.Ok(new 
+    { 
+        mensagem = "Funcionário atualizado parcialmente com sucesso.", 
+        funcionario 
+        });
+
+});
 
 app.Run();
