@@ -192,19 +192,76 @@ if (funcionario == null)
 // Buscar funcionários
 app.MapGet("/funcionario/departamento/busca", (string departamento) =>
 {
-    var filtrados = new System.Collections.Generic.List<Funcionario>();
-    
+    Funcionario[] funcionariosEncontrados = new Funcionario[totalFuncionarios];
+
+    int totalEncontrados = 0;
+
     for (int i = 0; i < totalFuncionarios; i++)
     {
-        if (listafuncionarios[i].Departamento.Contains(departamento, StringComparison.OrdinalIgnoreCase))
+        if (listafuncionarios[i].Departamento?.ToLower() == departamento.ToLower())
         {
-            filtrados.Add(listafuncionarios[i]);
+            funcionariosEncontrados[totalEncontrados] = listafuncionarios[i];
+            totalEncontrados++;
         }
     }
-    
-    return Results.Ok(new { funcionarios = filtrados });
+
+    if (totalEncontrados > 0)
+    {
+        Funcionario[] resultadoFinal = new Funcionario[totalEncontrados];
+
+        for (int i = 0; i < totalEncontrados; i++)
+        {
+            resultadoFinal[i] = funcionariosEncontrados[i];
+        }        
+
+        return Results.Ok(new
+        {
+            departamento,
+            funcionarios = resultadoFinal
+        });
+    } 
+
+    return Results.NotFound(new
+    {
+        message = "Nenhum funcionário encontrado para esse departamento."
+    });
+});
+
+app.MapGet("/funcionario/busca", (string nome) =>
+{
+    Funcionario[] funcionariosEncontrados = new Funcionario[totalFuncionarios];
+
+    int totalEncontrados = 0;
+
+    for (int i = 0; i < totalFuncionarios; i++)
+    {
+        if (listafuncionarios[i].Nome?.ToLower() == nome.ToLower())
+        {
+            funcionariosEncontrados[totalEncontrados] = listafuncionarios[i];
+            totalEncontrados++;
+        }
+    }
+
+    if (totalEncontrados > 0)
+    {
+        Funcionario[] resultadoFinal = new Funcionario[totalEncontrados];
+
+        for (int i = 0; i < totalEncontrados; i++)
+        {
+            resultadoFinal[i] = funcionariosEncontrados[i];
+        }        
+
+        return Results.Ok(new
+        {
+            nome,
+            funcionarios = resultadoFinal
+        });
+    } 
+
+    return Results.NotFound(new
+    {
+        message = "Nenhum funcionário encontrado esse nome."
+    });
 });
 
 app.Run();
-
-//python3 -m http.server 3000
