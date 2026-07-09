@@ -32,3 +32,4 @@
 /workspaces/Semana04/skymoon/obj/Debug/net10.0/SkyMoon.pdb
 /workspaces/Semana04/skymoon/obj/Debug/net10.0/SkyMoon.genruntimeconfig.cache
 /workspaces/Semana04/skymoon/obj/Debug/net10.0/ref/SkyMoon.dll
+/workspaces/Semana04/skymoon/bin/Debug/net10.0/frontend/package.json

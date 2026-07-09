@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SkyMoon - Cadastro</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>SkyMoon S.A.</h1>
+      <p>Cadastro de funcionários</p>
+    </header>
+
+    <nav class="menu">
+      <div class="menu-topo">
+        <span class="menu-titulo">Menu</span>
+
+        <button class="menu-botao" onclick="abrirFecharMenu()">☰</button>
+      </div>
+
+      <div class="menu-links" id="menuLinks">
+        <a href="index.html">Início</a>
+        <a href="cadastro.html">Cadastro</a>
+        <a href="listagem.html">Listagem</a>
+        <a href="busca.html">Busca</a>
+        <a href="atualizacao.html">Atualização</a>
+        <a href="remocao.html">Remoção</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Cadastrar Funcionário</h2>
+
+        <div class="form-grid">
+          <input type="text" id="nome" placeholder="Nome" />
+          <input type="number" id="idade" placeholder="Idade" />
+          <input type="text" id="cargo" placeholder="Cargo" />
+          <input type="text" id="departamento" placeholder="Departamento" />
+          <input type="number" id="salario" placeholder="Salário" step="0.01" />
+        </div>
+
+        <button onclick="cadastrarFuncionario()">Cadastrar</button>
+
+        <p id="mensagemCadastro" class="mensagem"></p>
+      </section>
+
+      <section class="card">
+        <h2>Resultado</h2>
+
+        <div id="resultado" class="resultado">Nenhum dado carregado.</div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

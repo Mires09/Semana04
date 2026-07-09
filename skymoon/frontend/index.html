@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SkyMoon - Início</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>SkyMoon S.A.</h1>
+      <p>Sistema de gerenciamento de funcionários</p>
+    </header>
+
+    <nav class="menu">
+      <div class="menu-topo">
+        <span class="menu-titulo">Menu</span>
+
+        <button class="menu-botao" onclick="abrirFecharMenu()">☰</button>
+      </div>
+
+      <div class="menu-links" id="menuLinks">
+        <a href="index.html">Início</a>
+        <a href="cadastro.html">Cadastro</a>
+        <a href="listagem.html">Listagem</a>
+        <a href="busca.html">Busca</a>
+        <a href="atualizacao.html">Atualização</a>
+        <a href="remocao.html">Remoção</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Bem-vindo ao sistema SkyMoon</h2>
+
+        <p>
+          Esta interface permite acessar as funcionalidades da API de
+          funcionários desenvolvida em C#.
+        </p>
+
+        <p>
+          Utilize o menu superior para cadastrar, listar, buscar, atualizar ou
+          remover funcionários.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Status da API</h2>
+
+        <button onclick="testarApi()">Testar conexão</button>
+
+        <p id="statusApi" class="mensagem"></p>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

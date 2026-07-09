@@ -188,4 +188,23 @@ if (funcionario == null)
 
 });
 
+
+// Buscar funcionários
+app.MapGet("/funcionario/departamento/busca", (string departamento) =>
+{
+    var filtrados = new System.Collections.Generic.List<Funcionario>();
+    
+    for (int i = 0; i < totalFuncionarios; i++)
+    {
+        if (listafuncionarios[i].Departamento.Contains(departamento, StringComparison.OrdinalIgnoreCase))
+        {
+            filtrados.Add(listafuncionarios[i]);
+        }
+    }
+    
+    return Results.Ok(new { funcionarios = filtrados });
+});
+
 app.Run();
+
+//python3 -m http.server 3000

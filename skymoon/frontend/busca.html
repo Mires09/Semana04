@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SkyMoon - Busca</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>SkyMoon S.A.</h1>
+      <p>Busca de funcionários</p>
+    </header>
+
+    <nav class="menu">
+      <div class="menu-topo">
+        <span class="menu-titulo">Menu</span>
+
+        <button class="menu-botao" onclick="abrirFecharMenu()">☰</button>
+      </div>
+
+      <div class="menu-links" id="menuLinks">
+        <a href="index.html">Início</a>
+        <a href="cadastro.html">Cadastro</a>
+        <a href="listagem.html">Listagem</a>
+        <a href="busca.html">Busca</a>
+        <a href="atualizacao.html">Atualização</a>
+        <a href="remocao.html">Remoção</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Buscar por Nome</h2>
+
+        <div class="linha">
+          <input
+            type="text"
+            id="buscaNome"
+            placeholder="Digite o nome do funcionário"
+          />
+          <button onclick="buscarPorNome()">Buscar</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Buscar por Departamento</h2>
+
+        <div class="linha">
+          <input
+            type="text"
+            id="buscaDepartamento"
+            placeholder="Digite o departamento"
+          />
+          <button onclick="buscarPorDepartamento()">Buscar</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Resultado da Busca</h2>
+
+        <div id="resultado" class="resultado">Nenhuma busca realizada.</div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
